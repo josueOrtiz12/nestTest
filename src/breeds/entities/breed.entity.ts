@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, UpdateDateColumn } from "typeorm";
+import { Cat } from "src/cats/entities/cat.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Breed {
@@ -12,6 +13,10 @@ name: string;
 @Column()
 description?:string;
 
+@OneToMany(()=> Cat, (cat)=> cat.breed)
+cats: Cat[];
+
+
 @CreateDateColumn()
 created_at: Date;
 
@@ -20,5 +25,7 @@ updated_at: Date;
 
 @DeleteDateColumn()
 deletead_at: Date;
+
+
 
 }

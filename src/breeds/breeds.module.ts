@@ -10,5 +10,6 @@ import { Breed } from './entities/breed.entity';
   ],
   controllers: [BreedsController],
   providers: [BreedsService],
+  exports: [TypeOrmModule]
 })
 export class BreedsModule {}

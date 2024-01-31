@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, UpdateDateColumn } from "typeorm"
+import { Breed } from "src/breeds/entities/breed.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class Cat {
@@ -12,8 +13,11 @@ export class Cat {
     @Column()
     age: number;
 
-    @Column()
-    breed: string;
+
+    @ManyToOne( ()=> Breed  , (breed)=> breed.id , {
+        eager: true, // para que traiga las raza al hacer un findOne
+    })
+    breed: Breed;
 
 
     @CreateDateColumn()
@@ -25,6 +29,8 @@ export class Cat {
 
     @DeleteDateColumn()
     deleteAt: Date;
+
+
 }
 
 
