@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CatsModule } from 'src/cats/cats.module';
+import { BreedsModule } from 'src/breeds/breeds.module';
 
 @Module({
     imports: [
@@ -16,7 +17,8 @@ import { CatsModule } from 'src/cats/cats.module';
             authMode: 'mysql_native_password',
         },
         entities: [
-            CatsModule
+            CatsModule,
+            BreedsModule,
         ],
         synchronize: true,
       }),
