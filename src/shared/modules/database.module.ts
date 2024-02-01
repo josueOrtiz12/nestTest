@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CatsModule } from 'src/cats/cats.module';
 import { BreedsModule } from 'src/breeds/breeds.module';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { BreedsModule } from 'src/breeds/breeds.module';
         entities: [
             CatsModule,
             BreedsModule,
+            UsersModule
         ],
         synchronize: true,
       }),
