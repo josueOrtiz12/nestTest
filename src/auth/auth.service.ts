@@ -5,6 +5,7 @@ import { RegisterDto } from './dto/register.dto';
 import * as bcryptjs from 'bcryptjs'
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { emit } from 'process';
 
 @Injectable()
 export class AuthService {
@@ -42,7 +43,7 @@ export class AuthService {
         throw new UnauthorizedException('Email or password is wrong');
     }
 
-    const payload = { email: user.email};
+    const payload = { email: user.email ,  role:user.role};
     const token = await this.jwtService.signAsync(payload);
 
     return  {
@@ -51,5 +52,10 @@ export class AuthService {
     };
 
    }
-
+   async profile({ email, role } : { email:string; role: string } ){
+    if(role  !== "admin"){
+        throw new UnauthorizedException('You are not authorized to acceess this resource');
+    }
+        return await this.usersService.findOneByEmail(email);
+   }
 }
